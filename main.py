@@ -1,14 +1,15 @@
-from typing import Optional
 
 from fastapi import FastAPI
 
 app = FastAPI()
 
-
 @app.get("/")
-async def root():
-    return {"message": "Hello World"}
+def stock_data():
+    import yfinance as yahooFinance
+    import json
+    # Here We are getting Facebook financial information
+    # We need to pass FB as argument for that
+    GetFacebookInformation = yahooFinance.Ticker("MCX.NS")
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "q": q}
+    # whole python dictionary is printed here
+    return (json.dumps(GetFacebookInformation.info))
